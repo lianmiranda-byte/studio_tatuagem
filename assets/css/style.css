@@ -1,0 +1,702 @@
+/* ==========================================================================
+   VERSO SOBRE PELE — GLASSMORPHISM CLÁSSICO + ANIMAÇÕES EXTRAVAGANTES
+   Paleta: #0E0B1D | #2A1E4D | #5A3B8C | #8B7CC7 | #C9C2E3 | #3A3A52
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+:root {
+    /* Paleta Oficial */
+    --bg-obsidian: #0E0B1D;
+    --indigo-deep: #2A1E4D;
+    --violet-mystic: #5A3B8C;
+    --lavender-glow: #8B7CC7;
+    --starlight-text: #C9C2E3;
+    --slate-muted: #3A3A52;
+    --text-pure: #F5F3FF;
+    --text-dim: #A69EC7;
+
+    /* Tokens de Glassmorphism Clássico */
+    --glass-sidebar: rgba(14, 11, 29, 0.66);
+    --glass-card: rgba(42, 30, 77, 0.42);
+    --glass-card-hover: rgba(42, 30, 77, 0.58);
+    --glass-modal: rgba(24, 18, 48, 0.84);
+    --glass-input: rgba(58, 58, 82, 0.42);
+
+    --glass-blur: blur(20px);
+    --glass-border: 1px solid rgba(201, 194, 227, 0.16);
+    --glass-border-active: 1px solid rgba(139, 124, 199, 0.48);
+    --glass-shadow: 0 12px 32px rgba(5, 3, 15, 0.55);
+
+    --radius-sm: 10px;
+    --radius-md: 14px;
+    --radius-lg: 18px;
+    --sidebar-width: 256px;
+    --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+    --ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ==========================================================================
+   KEYFRAMES — ANIMAÇÕES EXTRAVAGANTES
+   ========================================================================== */
+
+@keyframes auroraFloatOne {
+    0%   { transform: translate(0, 0) scale(1) rotate(0deg); }
+    50%  { transform: translate(12vw, 8vh) scale(1.18) rotate(120deg); }
+    100% { transform: translate(-4vw, 18vh) scale(0.95) rotate(240deg); }
+}
+
+@keyframes auroraFloatTwo {
+    0%   { transform: translate(0, 0) scale(1) rotate(0deg); }
+    50%  { transform: translate(-14vw, -10vh) scale(1.22) rotate(-140deg); }
+    100% { transform: translate(6vw, -16vh) scale(1.05) rotate(-260deg); }
+}
+
+@keyframes glassReveal {
+    0% {
+        opacity: 0;
+        transform: translateY(22px) scale(0.97);
+        filter: blur(8px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+    }
+}
+
+@keyframes auraPulse {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(139, 124, 199, 0.55), 0 4px 16px rgba(90, 59, 140, 0.45);
+    }
+    50% {
+        box-shadow: 0 0 0 8px rgba(139, 124, 199, 0), 0 6px 24px rgba(139, 124, 199, 0.7);
+    }
+}
+
+@keyframes statusBeacon {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.65);
+        opacity: 0.45;
+    }
+}
+
+@keyframes titleShimmer {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes rowGlideIn {
+    0% {
+        opacity: 0;
+        transform: translateX(-14px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+/* ==========================================================================
+   FUNDO BASE + ORBES DE AURORA EM MOVIMENTO CONTÍNUO
+   ========================================================================== */
+
+body {
+    margin: 0;
+    background-color: var(--bg-obsidian) !important;
+    color: var(--starlight-text) !important;
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    line-height: 1.55;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+}
+
+body::before,
+body::after {
+    content: '';
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(95px);
+    z-index: -1;
+    pointer-events: none;
+    will-change: transform;
+}
+
+body::before {
+    width: 460px;
+    height: 460px;
+    top: -60px;
+    left: 12%;
+    background: radial-gradient(circle, rgba(90, 59, 140, 0.58) 0%, rgba(42, 30, 77, 0.1) 70%);
+    animation: auroraFloatOne 18s ease-in-out infinite alternate;
+}
+
+body::after {
+    width: 420px;
+    height: 420px;
+    bottom: -70px;
+    right: 8%;
+    background: radial-gradient(circle, rgba(139, 124, 199, 0.36) 0%, rgba(90, 59, 140, 0.08) 70%);
+    animation: auroraFloatTwo 22s ease-in-out infinite alternate;
+}
+
+/* ==========================================================================
+   TIPOGRAFIA COM BRILHO LÍQUIDO
+   ========================================================================== */
+
+h1, h2, h3, .brand-title {
+    font-family: 'Cinzel', serif;
+    color: var(--text-pure);
+    letter-spacing: 0.03em;
+}
+
+.page-title {
+    font-size: clamp(1.35rem, 2.2vw, 1.85rem);
+    font-weight: 700;
+    margin: 0;
+    background: linear-gradient(90deg, #F5F3FF 0%, #C9C2E3 35%, #8B7CC7 65%, #F5F3FF 100%);
+    background-size: 220% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: titleShimmer 7s ease-in-out infinite;
+}
+
+/* ==========================================================================
+   APP SHELL & SIDEBAR DE VIDRO FOSCO
+   ========================================================================== */
+
+.app-shell {
+    display: grid;
+    grid-template-columns: var(--sidebar-width) 1fr;
+    min-height: 100vh;
+}
+
+.app-sidebar {
+    background: var(--glass-sidebar);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border-right: var(--glass-border);
+    padding: 1.4rem 1rem;
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    z-index: 1020;
+}
+
+.brand-box {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0.4rem 0.65rem 1.3rem;
+    border-bottom: var(--glass-border);
+    margin-bottom: 1.2rem;
+    text-decoration: none;
+}
+
+.brand-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: var(--radius-sm);
+    background: rgba(90, 59, 140, 0.72);
+    border: var(--glass-border-active);
+    display: grid;
+    place-items: center;
+    color: var(--text-pure);
+    font-size: 1.15rem;
+    animation: auraPulse 3.6s ease-in-out infinite;
+    transition: transform 0.35s var(--ease-spring);
+}
+
+.brand-box:hover .brand-icon {
+    transform: rotate(18deg) scale(1.1);
+}
+
+.brand-title {
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--text-pure);
+}
+
+.brand-sub {
+    font-size: 0.68rem;
+    color: var(--lavender-glow);
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+}
+
+.nav-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    flex: 1;
+}
+
+.nav-item-link {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    padding: 0.68rem 0.95rem;
+    border-radius: var(--radius-sm);
+    color: var(--starlight-text);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.91rem;
+    border: 1px solid transparent;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.28s var(--ease-spring);
+}
+
+.nav-item-link i {
+    font-size: 1.05rem;
+    color: var(--lavender-glow);
+    transition: transform 0.28s var(--ease-spring);
+}
+
+.nav-item-link:hover {
+    background: rgba(139, 124, 199, 0.16);
+    border: var(--glass-border);
+    color: var(--text-pure);
+    transform: translateX(6px);
+}
+
+.nav-item-link:hover i {
+    transform: scale(1.2) rotate(-6deg);
+}
+
+.nav-item-link.active {
+    background: rgba(90, 59, 140, 0.48);
+    border: var(--glass-border-active);
+    color: var(--text-pure);
+    font-weight: 600;
+    box-shadow: 0 6px 20px rgba(90, 59, 140, 0.35);
+}
+
+.sidebar-user {
+    margin-top: auto;
+    padding: 0.8rem;
+    border-radius: var(--radius-sm);
+    background: rgba(42, 30, 77, 0.35);
+    border: var(--glass-border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    transition: all 0.25s var(--ease-smooth);
+}
+
+.sidebar-user:hover {
+    border: var(--glass-border-active);
+    background: rgba(42, 30, 77, 0.5);
+}
+
+.avatar-circle {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: rgba(90, 59, 140, 0.65);
+    border: var(--glass-border-active);
+    color: var(--text-pure);
+    font-weight: 700;
+    font-size: 0.8rem;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    transition: transform 0.3s var(--ease-spring);
+}
+
+.avatar-circle:hover {
+    transform: scale(1.12);
+}
+
+.app-main {
+    padding: 2rem clamp(1rem, 3vw, 2.4rem);
+    max-width: 1440px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+/* ==========================================================================
+   CARDS DE VIDRO COM ENTRADA EM CASCATA + REFLEXO DIAGONAL (LIGHT SWEEP)
+   ========================================================================== */
+
+.bento-kpis {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(225px, 1fr));
+    gap: 1.15rem;
+    margin-bottom: 1.6rem;
+}
+
+.kpi-card {
+    background: var(--glass-card);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: var(--glass-border);
+    border-radius: var(--radius-md);
+    padding: 1.25rem 1.35rem;
+    box-shadow: var(--glass-shadow);
+    position: relative;
+    overflow: hidden;
+    animation: glassReveal 0.6s var(--ease-smooth) backwards;
+    transition: transform 0.32s var(--ease-spring), background 0.25s ease, border-color 0.25s ease, box-shadow 0.3s ease;
+}
+
+/* Cascata temporal nos KPIs */
+.kpi-card:nth-child(1) { animation-delay: 0.05s; }
+.kpi-card:nth-child(2) { animation-delay: 0.13s; }
+.kpi-card:nth-child(3) { animation-delay: 0.21s; }
+.kpi-card:nth-child(4) { animation-delay: 0.29s; }
+
+/* Feixe de luz especular passando pelo vidro no hover */
+.kpi-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -130%;
+    width: 75%;
+    height: 100%;
+    background: linear-gradient(
+        115deg,
+        transparent 0%,
+        rgba(201, 194, 227, 0.04) 40%,
+        rgba(245, 243, 255, 0.22) 50%,
+        rgba(201, 194, 227, 0.04) 60%,
+        transparent 100%
+    );
+    transform: skewX(-20deg);
+    transition: left 0.65s var(--ease-smooth);
+    pointer-events: none;
+}
+
+.kpi-card:hover::after {
+    left: 155%;
+}
+
+.kpi-card:hover {
+    background: var(--glass-card-hover);
+    border: var(--glass-border-active);
+    transform: translateY(-6px) scale(1.015);
+    box-shadow: 0 18px 40px rgba(90, 59, 140, 0.35);
+}
+
+.kpi-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-dim);
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.kpi-label i {
+    transition: transform 0.32s var(--ease-spring);
+}
+
+.kpi-card:hover .kpi-label i {
+    transform: scale(1.25) rotate(8deg);
+}
+
+.kpi-value {
+    font-size: clamp(1.45rem, 2.3vw, 1.9rem);
+    font-weight: 700;
+    color: var(--text-pure);
+    margin-top: 0.4rem;
+}
+
+.card, .glass-panel {
+    background: var(--glass-card) !important;
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: var(--glass-border) !important;
+    border-radius: var(--radius-md) !important;
+    box-shadow: var(--glass-shadow);
+    color: var(--starlight-text);
+    overflow: hidden;
+    animation: glassReveal 0.65s var(--ease-smooth) 0.18s backwards;
+    transition: border-color 0.28s ease, box-shadow 0.28s ease;
+}
+
+.card:hover, .glass-panel:hover {
+    border-color: rgba(139, 124, 199, 0.34) !important;
+    box-shadow: 0 16px 42px rgba(14, 11, 29, 0.72);
+}
+
+.card-header {
+    background: rgba(14, 11, 29, 0.38) !important;
+    border-bottom: var(--glass-border) !important;
+    padding: 0.95rem 1.25rem;
+    font-weight: 600;
+    color: var(--text-pure);
+}
+
+/* ==========================================================================
+   TABELAS COM LINHAS INTERATIVAS
+   ========================================================================== */
+
+.table {
+    --bs-table-bg: transparent;
+    --bs-table-hover-bg: rgba(139, 124, 199, 0.12);
+    color: var(--starlight-text) !important;
+    margin: 0;
+}
+
+.table thead th {
+    background: rgba(14, 11, 29, 0.42);
+    color: var(--lavender-glow);
+    font-size: 0.73rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 700;
+    padding: 0.9rem 1.15rem;
+    border-bottom: var(--glass-border);
+}
+
+.table tbody tr {
+    animation: rowGlideIn 0.45s var(--ease-smooth) backwards;
+    transition: transform 0.2s var(--ease-smooth), background-color 0.2s ease;
+}
+
+.table tbody tr:nth-child(1) { animation-delay: 0.05s; }
+.table tbody tr:nth-child(2) { animation-delay: 0.10s; }
+.table tbody tr:nth-child(3) { animation-delay: 0.15s; }
+.table tbody tr:nth-child(4) { animation-delay: 0.20s; }
+.table tbody tr:nth-child(5) { animation-delay: 0.25s; }
+.table tbody tr:nth-child(6) { animation-delay: 0.30s; }
+
+.table tbody tr:hover {
+    transform: translateX(4px);
+}
+
+.table tbody td {
+    padding: 0.9rem 1.15rem;
+    border-bottom: 1px solid rgba(201, 194, 227, 0.08);
+    vertical-align: middle;
+}
+
+.table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* ==========================================================================
+   INPUTS & BOTÕES COM BRILHO DE VARREDURA E MOLA
+   ========================================================================== */
+
+.form-control, .form-select {
+    background-color: var(--glass-input) !important;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: var(--glass-border) !important;
+    color: var(--text-pure) !important;
+    border-radius: var(--radius-sm);
+    padding: 0.62rem 0.9rem;
+    transition: all 0.25s var(--ease-smooth);
+}
+
+.form-control::placeholder {
+    color: var(--text-dim) !important;
+}
+
+.form-control:focus, .form-select:focus {
+    background-color: rgba(58, 58, 82, 0.68) !important;
+    border: var(--glass-border-active) !important;
+    box-shadow: 0 0 0 4px rgba(139, 124, 199, 0.22) !important;
+    transform: translateY(-1px);
+    outline: none;
+}
+
+.form-select option {
+    background-color: #17122E;
+    color: var(--text-pure);
+}
+
+.btn-brand, .btn-danger, .btn-primary {
+    background: rgba(90, 59, 140, 0.82) !important;
+    backdrop-filter: blur(10px);
+    border: var(--glass-border-active) !important;
+    color: var(--text-pure) !important;
+    font-weight: 600;
+    border-radius: var(--radius-sm);
+    padding: 0.56rem 1.2rem;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.28s var(--ease-spring), background 0.25s ease, box-shadow 0.28s ease;
+}
+
+.btn-brand::before, .btn-danger::before, .btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -120%;
+    width: 65%;
+    height: 100%;
+    background: linear-gradient(110deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+    transform: skewX(-22deg);
+    transition: left 0.55s var(--ease-smooth);
+}
+
+.btn-brand:hover::before, .btn-danger:hover::before, .btn-primary:hover::before {
+    left: 140%;
+}
+
+.btn-brand:hover, .btn-danger:hover, .btn-primary:hover {
+    background: var(--lavender-glow) !important;
+    color: var(--bg-obsidian) !important;
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 10px 26px rgba(139, 124, 199, 0.55);
+}
+
+.btn-brand:active, .btn-danger:active, .btn-primary:active {
+    transform: translateY(0) scale(0.97);
+}
+
+/* ==========================================================================
+   MODAIS & PÍLULAS DE STATUS PULSANTES
+   ========================================================================== */
+
+.modal.fade .modal-dialog {
+    transform: scale(0.92) translateY(18px);
+    transition: transform 0.32s var(--ease-spring), opacity 0.25s ease;
+}
+
+.modal.show .modal-dialog {
+    transform: scale(1) translateY(0);
+}
+
+.modal-content {
+    background: var(--glass-modal) !important;
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: var(--glass-border-active) !important;
+    border-radius: var(--radius-lg) !important;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.8);
+}
+
+.modal-header, .modal-footer {
+    border-color: rgba(201, 194, 227, 0.14) !important;
+    background: rgba(14, 11, 29, 0.35);
+}
+
+.status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 0.3rem 0.75rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    backdrop-filter: blur(8px);
+}
+
+.status-pill::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+    animation: statusBeacon 2.2s ease-in-out infinite;
+}
+
+.pill-agendado { background: rgba(139, 124, 199, 0.2); color: #E5DEFF; border: 1px solid rgba(139, 124, 199, 0.35); }
+.pill-concluido { background: rgba(16, 185, 129, 0.18); color: #6EE7B7; border: 1px solid rgba(16, 185, 129, 0.35); }
+.pill-cancelado { background: rgba(239, 68, 68, 0.18); color: #FCA5A5; border: 1px solid rgba(239, 68, 68, 0.35); }
+
+.list-group-item {
+    background: transparent !important;
+    border-color: rgba(201, 194, 227, 0.12) !important;
+    color: var(--starlight-text) !important;
+    transition: transform 0.2s var(--ease-smooth), background-color 0.2s ease;
+}
+
+.list-group-item:hover {
+    background: rgba(139, 124, 199, 0.08) !important;
+    transform: translateX(4px);
+}
+
+/* ==========================================================================
+   TELAS DE LOGIN & CADASTRO
+   ========================================================================== */
+
+body.login-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.login-card {
+    background: var(--glass-card) !important;
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: var(--glass-border-active) !important;
+    border-radius: var(--radius-lg) !important;
+    box-shadow: var(--glass-shadow);
+    animation: glassReveal 0.7s var(--ease-spring) backwards;
+}
+
+/* ==========================================================================
+   ACESSIBILIDADE & FALLBACKS
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .app-sidebar, .kpi-card, .card, .login-card, .modal-content {
+        background: #1B1438 !important;
+    }
+}
+
+@media (max-width: 991px) {
+    .app-shell {
+        grid-template-columns: 1fr;
+    }
+    .app-sidebar {
+        position: fixed;
+        bottom: 0; top: auto; left: 0; right: 0;
+        height: auto;
+        flex-direction: row;
+        padding: 0.5rem;
+        border-right: none;
+        border-top: var(--glass-border);
+    }
+    .brand-box, .sidebar-user {
+        display: none;
+    }
+    .nav-menu {
+        flex-direction: row;
+        justify-content: space-around;
+        width: 100%;
+    }
+    .nav-item-link {
+        flex-direction: column;
+        gap: 3px;
+        padding: 0.4rem 0.6rem;
+        font-size: 0.72rem;
+    }
+    .nav-item-link:hover {
+        transform: translateY(-2px);
+    }
+    .app-main {
+        padding-bottom: 5.5rem;
+    }
+}
